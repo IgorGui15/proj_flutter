@@ -54,13 +54,34 @@ class LoginPage extends StatelessWidget {
                     onPrimary: Colors.white,
                   ),
                   child: Text('Entrar'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MainPage()),
-                    );
+                  onPressed: () async {
+                    try {
+                      // Adicione a lógica para autenticação com e-mail e senha
+                      // Você pode usar o método signInWithEmailAndPassword do Firebase Authentication
+                      // Exemplo:
+                      // await FirebaseAuth.instance.signInWithEmailAndPassword(
+                      //   email: emailController.text.trim(),
+                      //   password: passwordController.text,
+                      // );
+                
+                      // Após autenticar com sucesso, navegue para a próxima tela
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainPage()),
+                      );
+                    } catch (e) {
+                      // Trate possíveis erros de autenticação, exibindo uma mensagem ao usuário
+                      print('Erro de autenticação: $e');
+                      // Exemplo de exibição de erro para o usuário
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Erro ao entrar. Verifique suas credenciais.'),
+                        ),
+                      );
+                    }
                   },
                 ),
+                
                 TextButton(
                   style: TextButton.styleFrom(
                     primary: Colors.black,
